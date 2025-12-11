@@ -82,4 +82,17 @@ class GrilleGuasti:
         grid_visu = np.ma.masked_where(self.grid == 0, self.grid)
         plt.imshow(grid_visu[1:, 1:], aspect='auto', interpolation='nearest', 
                    cmap='viridis', origin='upper')
-        plt.title(f"Grille
+        plt.title(f"Grille de Guasti (N={self.N}) - Matrice de Divisibilité", fontsize=14)
+        plt.xlabel("Axe des Entiers (Colonnes n)", fontsize=12)
+        plt.ylabel("Tables / Diviseurs (Lignes i)", fontsize=12)
+        plt.colorbar(label="Valeur du Multiple")
+        plt.plot([0, self.N-1], [0, self.N-1], 'r--', linewidth=2, label="Diagonale d'Identité (n)")
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+
+if __name__ == "__main__":
+    g = GrilleGuasti(20)
+    print(f"Test 12 (Composé) : {g.analyser_colonne(12)['signature']}")
+    print(f"Test 13 (Premier) : {g.analyser_colonne(13)['signature']}")
+    # g.afficher() # Décommenter pour voir
