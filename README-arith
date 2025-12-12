@@ -1,0 +1,322 @@
+# Arithmetic Geometry: Computational Framework and Theoretical Foundations
+
+*Un cadre rigoureux pour la géométrie arithmétique combinant exposition théorique formelle, implémentation computationnelle et visualisations analytiques.*
+
+## 📖 Vue d'ensemble
+
+Ce dépôt développe une **théorie géométrique unifiée** à l'intersection de la géométrie algébrique, de la théorie des nombres et de l'analyse diophantienne. Nous explorons :
+
+### Domaines principaux
+
+1. **Courbes Elliptiques et Variétés Abéliennes**
+   - Points rationnels et structure du groupe de Mordell-Weil
+   - Isogénies et volcans d'isogénies
+   - Représentations galoisiennes et conjecture de Serre
+
+2. **Équations Diophantiennes et Hauteurs**
+   - Fonctions de hauteur (Weil, Néron-Tate, Faltings)
+   - Bornes effectives et approximation diophantienne
+   - Équation de Pell généralisée et familles paramétriques
+
+3. **Théorie Arakelovienne**
+   - Géométrie hermitienne sur variétés arithmétiques
+   - Hauteurs d'Arakelov et théorie d'intersection
+   - Finiteness de Faltings et conjectures de Bogomolov
+
+4. **Formes Modulaires et Représentations L-adiques**
+   - Connexions modulaires (preuve de Wiles du dernier théorème de Fermat)
+   - Fonctions L et conjecture de Birch & Swinnerton-Dyer
+   - Codes de Fourier et transformées arithmétiques
+
+5. **Méthodes de Descente et Groupes de Tate-Shafarevitch**
+   - 2-descente sur courbes elliptiques
+   - Espaces homogènes et groupes de Selmer
+   - Calculs effectifs du rang de Mordell-Weil
+
+## 🏗️ Architecture du Dépôt
+
+```
+arithmetic-geometry/
+├── paper/
+│   ├── arithmetic_geometry_monograph.tex
+│   ├── arithmetic_geometry_monograph.pdf
+│   ├── chapters/
+│   │   ├── 01_foundations.tex           # Fondations géométriques
+│   │   ├── 02_elliptic_curves.tex       # Courbes elliptiques
+│   │   ├── 03_heights_diophantine.tex   # Hauteurs & équations
+│   │   ├── 04_modular_forms.tex         # Formes modulaires
+│   │   ├── 05_arakelov_theory.tex       # Théorie d'Arakelov
+│   │   └── 06_descent_methods.tex       # Méthodes de descente
+│   ├── appendices/
+│   │   ├── A_categorical_background.tex
+│   │   ├── B_algorithmic_methods.tex
+│   │   └── C_computational_complexity.tex
+│   └── references.bib
+│
+├── code/
+│   ├── arithmetic_geometry/
+│   │   ├── __init__.py
+│   │   ├── elliptic_curves.py          # Courbes elliptiques
+│   │   ├── height_functions.py         # Hauteurs
+│   │   ├── diophantine_equations.py    # Équations diophantiennes
+│   │   ├── modular_forms.py            # Formes modulaires
+│   │   ├── arakelov_geometry.py        # Théorie d'Arakelov
+│   │   ├── descent_methods.py          # Descentes
+│   │   ├── lattice_reduction.py        # Réduction de réseaux
+│   │   └── number_theoretic_utils.py   # Utilitaires
+│   ├── tests/
+│   │   ├── test_elliptic_curves.py
+│   │   ├── test_heights.py
+│   │   ├── test_diophantine.py
+│   │   └── test_modular_forms.py
+│   └── requirements.txt
+│
+├── experiments/
+│   ├── exp01_rational_points_enumeration.py
+│   ├── exp02_mordell_weil_rank_computation.py
+│   ├── exp03_height_bounds_verification.py
+│   ├── exp04_isogeny_graphs.py
+│   ├── exp05_discriminant_analysis.py
+│   ├── exp06_galois_representations.py
+│   ├── exp07_abc_conjecture_bounds.py
+│   └── exp08_tate_shafarevitch_structure.py
+│
+├── visualizations/
+│   ├── elliptic_curves_gallery.py
+│   ├── height_landscape.py
+│   ├── modular_lattice_visualization.py
+│   ├── isogeny_volcano_renderer.py
+│   ├── results/
+│   │   ├── elliptic_curves_*.png
+│   │   ├── height_distributions_*.png
+│   │   ├── isogeny_volcanos_*.png
+│   │   └── galois_orbits_*.png
+│
+├── data/
+│   ├── elliptic_curves_cremona_subset.csv
+│   ├── modular_forms_database.csv
+│   ├── abc_triples_sample.csv
+│   └── rational_points_benchmark.csv
+│
+├── tutorials/
+│   ├── 01_introduction_elliptic_curves.md
+│   ├── 02_height_functions_explained.md
+│   ├── 03_diophantine_equations_methods.md
+│   ├── 04_modular_forms_and_galois.md
+│   ├── 05_computational_methods.md
+│   └── jupyter_notebooks/
+│       ├── elliptic_curves_fundamentals.ipynb
+│       ├── height_computations.ipynb
+│       ├── rational_points_finder.ipynb
+│       ├── modular_forms_explorer.ipynb
+│       └── descent_methods_demo.ipynb
+│
+├── .gitignore
+├── ARCHITECTURE.md
+├── MATHEMATICAL_NOTATION.md
+├── CONTRIBUTING.md
+└── LICENSE
+
+```
+
+## 🔬 Concepts Clés Implémentés
+
+### 1. Courbes Elliptiques
+
+```python
+from arithmetic_geometry import EllipticCurve, MordellWeilGroup
+
+# Création d'une courbe elliptique en forme de Weierstrass
+# E: y² = x³ + ax + b
+E = EllipticCurve(a=1, b=-1)
+
+# Vérification de la non-singularité
+print(f"Discriminant: {E.discriminant}")
+print(f"j-invariant: {E.j_invariant()}")
+
+# Points de torsion
+torsion = E.torsion_subgroup()
+print(f"Structure de torsion: {torsion}")
+
+# Groupe de Mordell-Weil (rang et points générateurs)
+MW = MordellWeilGroup(E)
+rank = MW.compute_rank()
+generators = MW.find_generators()
+```
+
+### 2. Fonctions de Hauteur
+
+```python
+from arithmetic_geometry import HeightFunction, CanonicalHeight
+
+# Hauteur sur la droite projective
+h = HeightFunction(variety="projective_line")
+height_value = h([3, 7])  # Représentation homogène
+
+# Hauteur canonique (Néron-Tate) sur courbes elliptiques
+E = EllipticCurve(a=1, b=-1)
+canonical_h = CanonicalHeight(E)
+
+P = (0, -1)  # Point sur E
+h_canonical = canonical_h(P)
+print(f"Canonical height of P: {h_canonical}")
+
+# Propriétés : bilinéarité et définitude positive
+P, Q = find_basis_points(E)
+bilinearity_check = canonical_h.pairing(P, Q)
+```
+
+### 3. Équations Diophantiennes
+
+```python
+from arithmetic_geometry import DiophantineSolver, PellEquation
+
+# Équation de Pell : x² - Dy² = 1
+pell = PellEquation(D=13)
+fundamental_solution = pell.find_fundamental_solution()
+all_solutions = pell.generate_solutions(max_denominator=10000)
+
+# Équation générale : ax² + bxy + cy² + dx + ey + f = 0
+solver = DiophantineSolver()
+solutions = solver.solve_quadratic_form(
+    coefficients=[1, 0, 1, -2, -3, 0],
+    bound=1000
+)
+```
+
+### 4. Méthodes de Descente
+
+```python
+from arithmetic_geometry import TwoDescent, HomogeneousSpace
+
+# Descente 2-itérée sur courbe elliptique
+E = EllipticCurve(a=0, b=-432)  # Courbe de conducteur faible
+descent = TwoDescent(E)
+
+# Calcul des espaces homogènes C_d
+homogeneous_spaces = descent.compute_homogeneous_spaces()
+
+# Groupe de Selmer (approximation de Mordell-Weil)
+selmer_group = descent.compute_selmer_group()
+rank_lower_bound = len(selmer_group)
+
+# Groupe de Tate-Shafarevitch (points localement partout)
+sha = descent.estimate_tate_shafarevitch_group()
+```
+
+### 5. Théorie d'Arakelov
+
+```python
+from arithmetic_geometry import ArakelovHeight, HermitianMetric
+
+# Hauteur d'Arakelov sur courbes arithmétiques
+E = EllipticCurve(a=1, b=-1)
+arakelov_h = ArakelovHeight(E)
+
+# Contributions archimédienne et non-archimédienne
+P = (0, -1)
+height_archimedean = arakelov_h.archimedean_component(P)
+height_non_archimedean = arakelov_h.non_archimedean_component(P, prime=2)
+
+# Métrique hermitienne sur fibré déterminant
+metric = HermitianMetric(E)
+deg_arithmetic = metric.degree_arithmetic_variety()
+```
+
+## 📊 Expériences Computationnelles
+
+| Expérience | Objet | Résultats |
+|-----------|--------|-----------|
+| **exp01** | Énumération points rationnels | Courbes de petit conducteur |
+| **exp02** | Calcul rang Mordell-Weil | Statistiques sur familles |
+| **exp03** | Vérification bornes hauteurs | Tests Faltings & Colmez |
+| **exp04** | Graphes d'isogénies | Volcans et structures p-adiques |
+| **exp05** | Analyse discriminants | Propriétés géométriques |
+| **exp06** | Représentations galoisiennes | Images des représentations ℓ-adiques |
+| **exp07** | Bornes conjecture abc | Estimations effectifs |
+| **exp08** | Groupe Tate-Shafarevitch | Estimation d'ordre |
+
+## 🎯 Installation et Démarrage
+
+### Prérequis
+
+```bash
+Python >= 3.9
+pip install numpy scipy sympy matplotlib pandas
+pip install sage>=9.0  # Optionnel mais recommandé
+```
+
+### Installation
+
+```bash
+git clone https://github.com/LordLexAsti/arithmetic-geometry.git
+cd arithmetic-geometry
+pip install -r code/requirements.txt
+```
+
+### Premiers pas
+
+```bash
+# Exécuter une expérience simple
+python code/experiments/exp01_rational_points_enumeration.py
+
+# Lancer un notebook tutorial
+jupyter notebook code/tutorials/jupyter_notebooks/elliptic_curves_fundamentals.ipynb
+
+# Générer visualisations
+python code/visualizations/elliptic_curves_gallery.py
+```
+
+## 📐 Notations Mathématiques
+
+Voir [`MATHEMATICAL_NOTATION.md`](MATHEMATICAL_NOTATION.md) pour les conventions utilisées :
+
+- **Variétés** : V, W, X, Y, Z
+- **Courbes elliptiques** : E, C, ℰ
+- **Points** : P, Q, R (affine), [x:y:z] (projectif)
+- **Hauteurs** : h, ĥ, hₐ (Arakelov)
+- **Groupes** : 𝔊, 𝔈, 𝒪, 𝒞
+- **Anneaux** : ℤ, ℚ, ℝ, ℂ, 𝔽ₚ
+
+## 🔗 Connexions avec guasti-transform
+
+Ce dépôt `arithmetic-geometry` est **complémentaire** à [`guasti-transform`](https://github.com/LordLexAsti/guasti-transform) :
+
+| Aspect | guasti-transform | arithmetic-geometry |
+|--------|------------------|-------------------|
+| **Focus** | Analyse spectrale multiplicative | Géométrie algébrique/théorie nombres |
+| **Objet principal** | Transformation de Guasti | Courbes elliptiques & variétés |
+| **Periodogrammes** | Oscillations & patterns | Hauteurs & points rationnels |
+| **Applications** | Théorie multiplicative | Équations diophantiennes |
+
+Les deux dépôts peuvent être intégrés pour l'étude de **structures arithmétiques supérieures**.
+
+## 📚 Références Principales
+
+- Silverman, J. H. (2009). *The Arithmetic of Elliptic Curves*, 2nd ed. Springer.
+- Hindry, M. & Silverman, J. H. (2000). *Diophantine Geometry*. Springer.
+- Cornell, G., Silverman, J. H., & Stevens, G. (Eds.) (1997). *Modular Forms and Fermat's Last Theorem*. Springer.
+- Faltings, G. (1983). "Endlichkeitssätze für abelsche Varietäten über Zahlkörpern". *Inventiones mathematicae*, 73(3), 349-366.
+- Arakelov, S. Yu. (1974). "An Intersection Theory for Divisors on an Arithmetic Surface". *Izvestiya Rossiiskoi Akademii Nauk*, 8(6), 1167-1210.
+
+## 🚀 Points Ouverts de Recherche
+
+- [ ] Efficacité computationnelle de la 2-descente pour grand rang
+- [ ] Structures de groupes de Tate-Shafarevitch sur ℚ
+- [ ] Hauteurs effectives sur variétés abéliennes supérieures
+- [ ] Représentations galoisiennes et critères de modularité
+- [ ] Conjecture abc et bornes géométriques
+
+## 💡 Contribution
+
+Les contributions sont bienvenues ! Veuillez consulter [`CONTRIBUTING.md`](CONTRIBUTING.md) pour les directives.
+
+## 📄 Licence
+
+MIT License - Voir [`LICENSE`](LICENSE)
+
+---
+
+**Auteur** : LordLexAsti  
+**Version** : 1.0.0  
+**Dernière mise à jour** : Décembre 2025
