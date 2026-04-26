@@ -24,7 +24,7 @@ Contrairement à une table de Pythagore classique ($i \times j$), la Grille de G
 * **Le Résultat :** En regardant la colonne $n$, on lit verticalement la liste exacte de ses diviseurs.
 
 ### Théorèmes Visuels
-1.  **Carrés Parfaits :** Un nombre est un carré si et seulement si sa signature angulaire contient **45°** — ce 45° est l’**axe ontologique (diagonale d’identité)**, pas une diagonale de carrés parfaits. Le carré est détecté car un diviseur se place exactement sur l’axe (d = √n).
+1.  **Axe d'identité :** L’angle **45°** correspond à la **diagonale d’identité (axe ontologique)**. Les alignements à 45° signifient qu’un diviseur tombe exactement sur l’axe.
 2.  **Nombres Premiers :** Une colonne est "premier" si elle ne contient que deux points (le plafond L1 et le sol Ln).
 
 ## 🔗 Écosystème Guasti
